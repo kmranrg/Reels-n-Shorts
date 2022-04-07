@@ -1,0 +1,7 @@
+# For Windows -> Open 'cmd' and run the following command
+telnet towel.blinkenlights.nl
+
+# For Mac -> Open 'Terminal' and run the following command
+nc towel.blinkenlights.nl 23 
+
+NOTE: For Windows make sure that you've enabled "Telnet Client" from "Turn Windows Features on or off"
