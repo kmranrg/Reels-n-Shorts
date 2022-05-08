@@ -1,22 +1,20 @@
-# importing the library
-from turtle import *
+# importing the turtle library
+import turtle as t
 
-# setting up the turtle graphics variables
-t = Turtle()
-s = Screen()
+# declaring the background color
+t.bgcolor('black')
 
-# defining the background color
-s.bgcolor("black")
-
-# defining the widht and the speed of turtle variable
-t.width(3)
+# setting up the pen size and the speed of the turtle variable
+t.pensize(2)
 t.speed(0)
 
-# making the color palette
-colors = ['orange','white','green']
+# defining the color palette
+colors = ['red', 'magenta', 'blue', 'cyan', 'green', 'white', 'yellow']
 
 # logic
-for i in range(300):
-    t.pencolor(colors[i%3])
-    t.forward(i*4)
-    t.right(1201)
+for i in range(6):
+    for color in colors:
+        t.color(color)
+        t.circle(100)
+        t.left(10)
+    t.hideturtle()
