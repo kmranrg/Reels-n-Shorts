@@ -1,5 +1,6 @@
 import pygame
 import math
+import time
 
 # Initialize Pygame
 pygame.init()
@@ -10,8 +11,7 @@ NucleusRadius = 20
 ElectronRadius = 10
 Orbit1Radius = 100
 Orbit2Radius = 150
-Orbit3Radius = 200
-OrbitSpeed = 0.01
+OrbitSpeed = 0.005  # Reduced speed for slower electron movement
 
 # Colors
 WHITE = (255, 255, 255)
@@ -31,8 +31,8 @@ font = pygame.font.Font(None, 36)
 # Main loop
 running = True
 angle1 = 0
-angle2 = math.pi / 4  # Offset the second electron
-angle3 = math.pi / 2  # Offset the third electron
+angle2 = math.pi  # Second electron is in the K shell
+angle3 = math.pi  # Third electron is in the L shell
 
 while running:
     for event in pygame.event.get():
@@ -45,15 +45,14 @@ while running:
     # Calculate electron positions
     electron1_x = WIDTH // 2 + Orbit1Radius * math.cos(angle1)
     electron1_y = HEIGHT // 2 + Orbit1Radius * math.sin(angle1)
-    electron2_x = WIDTH // 2 + Orbit2Radius * math.cos(angle2)
-    electron2_y = HEIGHT // 2 + Orbit2Radius * math.sin(angle2)
-    electron3_x = WIDTH // 2 + Orbit3Radius * math.cos(angle3)
-    electron3_y = HEIGHT // 2 + Orbit3Radius * math.sin(angle3)
+    electron2_x = WIDTH // 2 + Orbit1Radius * math.cos(angle2)  # Both electrons are on the first orbit
+    electron2_y = HEIGHT // 2 + Orbit1Radius * math.sin(angle2)
+    electron3_x = WIDTH // 2 + Orbit2Radius * math.cos(angle3)  # Third electron is in the L shell
+    electron3_y = HEIGHT // 2 + Orbit2Radius * math.sin(angle3)
 
     # Draw the orbit paths
     pygame.draw.circle(screen, ORBIT_COLOR, (WIDTH // 2, HEIGHT // 2), Orbit1Radius, 1)
     pygame.draw.circle(screen, ORBIT_COLOR, (WIDTH // 2, HEIGHT // 2), Orbit2Radius, 1)
-    pygame.draw.circle(screen, ORBIT_COLOR, (WIDTH // 2, HEIGHT // 2), Orbit3Radius, 1)
 
     # Draw the nucleus with label in red
     pygame.draw.circle(screen, RED, (WIDTH // 2, HEIGHT // 2), NucleusRadius)
@@ -81,6 +80,9 @@ while running:
 
     angle1 += OrbitSpeed
     angle2 += OrbitSpeed
-    angle3 += OrbitSpeed
+    angle3 += OrbitSpeed  # L shell electron moves in the outer orbit
+
+    # Introduce a delay for slower electron movement
+    time.sleep(0.02)  # Adjust this value for the desired speed
 
 pygame.quit()
